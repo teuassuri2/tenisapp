@@ -5,15 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreGroupStudentRequest extends FormRequest
-{
+class StoreGroupStudentRequest extends FormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -22,19 +21,16 @@ class StoreGroupStudentRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-'group_id' => ['required'], 
-'student_id' => ['required'], ];
-
+            'group_id' => ['required'],
+            'student_id' => ['required'],];
     }
 
-    public function messages()
-    {
+    public function messages() {
         return [
-'group_id.required' => 'O campo é Group_id obrigatório', 
-'student_id.required' => 'O campo é Student_id obrigatório', ];
-
+            'group_id.required' => 'O campo é Group_id obrigatório',
+            'student_id.required' => 'O campo é Student_id obrigatório',];
     }
+
 }

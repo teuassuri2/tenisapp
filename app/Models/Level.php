@@ -1,10 +1,17 @@
-<?php namespace App\Models;use Illuminate\Database\Eloquent\Factories\HasFactory;use Illuminate\Database\Eloquent\Model;class Level  extends Model{
-    
-            protected $table = "level";
+<?php
 
+namespace App\Models;
 
-        protected $fillable = ['name', ];protected $dates = [
-'created_at',
- 'updated_at',
-];
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Level extends Model {
+
+    protected $table = "level";
+    protected $fillable = ['name',];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
 }

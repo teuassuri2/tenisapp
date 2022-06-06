@@ -5,15 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreClientRequest extends FormRequest
-{
+class StoreClientRequest extends FormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -22,21 +21,18 @@ class StoreClientRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-'name' => ['required'], 
-'telefone' => ['required'], 
-'email' => ['required'], ];
-
+            'name' => ['required'],
+            'telefone' => ['required'],
+            'email' => ['required'],];
     }
 
-    public function messages()
-    {
+    public function messages() {
         return [
-'name.required' => 'O campo é Name obrigatório', 
-'telefone.required' => 'O campo é Telefone obrigatório', 
-'email.required' => 'O campo é Email obrigatório', ];
-
+            'name.required' => 'O campo é Name obrigatório',
+            'telefone.required' => 'O campo é Telefone obrigatório',
+            'email.required' => 'O campo é Email obrigatório',];
     }
+
 }

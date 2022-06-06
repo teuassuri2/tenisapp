@@ -1,10 +1,17 @@
-<?php namespace App\Models;use Illuminate\Database\Eloquent\Factories\HasFactory;use Illuminate\Database\Eloquent\Model;class GroupDay  extends Model{
-    
-            protected $table = "group_day";
+<?php
 
+namespace App\Models;
 
-        protected $fillable = ['day', 'group_id', ];protected $dates = [
-'created_at',
- 'updated_at',
-];
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class GroupDay extends Model {
+
+    protected $table = "group_day";
+    protected $fillable = ['day', 'group_id',];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
 }

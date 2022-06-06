@@ -5,15 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreGroupDayRequest extends FormRequest
-{
+class StoreGroupDayRequest extends FormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -22,19 +21,16 @@ class StoreGroupDayRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-'day' => ['required'], 
-'group_id' => ['required'], ];
-
+            'day' => ['required'],
+            'group_id' => ['required'],];
     }
 
-    public function messages()
-    {
+    public function messages() {
         return [
-'day.required' => 'O campo é Day obrigatório', 
-'group_id.required' => 'O campo é Group_id obrigatório', ];
-
+            'day.required' => 'O campo é Day obrigatório',
+            'group_id.required' => 'O campo é Group_id obrigatório',];
     }
+
 }
