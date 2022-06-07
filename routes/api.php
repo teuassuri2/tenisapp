@@ -22,6 +22,14 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
 Route::group(['middleware' => 'apiJwt', 'prefix' => 'rest'], function () {
 
+    Route::get('weather/forecast', 'ScheduleStudentController@weatherForecast');
+    
+    Route::get('student/index', 'StudentController@indexApi');
+    Route::post('student/store', 'StudentController@storeApi');
+    Route::get('student/edit/{id}', 'StudentController@editApi');
+    Route::get('student/remover/{id}', 'StudentController@removerApi');
+    
+    
     Route::get('group/index', 'GroupController@indexApi');
     Route::post('group/store', 'GroupController@storeApi');
     Route::post('group/edit/{id}', 'GroupController@editApi');
@@ -29,14 +37,11 @@ Route::group(['middleware' => 'apiJwt', 'prefix' => 'rest'], function () {
 
     Route::get('group_day/index/{group_id}', 'GroupDayController@indexApi');
 
-    Route::get('group_student/index/{student_id}', 'ScheduleStudent@indexApi');
+    Route::get('group_student/index/{student_id}', 'ScheduleStudentController@indexApi');
 
     Route::get('level/index', 'LevelController@indexApi');
 
-    Route::get('student/index', 'StudentController@indexApi');
-    Route::post('student/store', 'StudentController@storeApi');
-    Route::get('student/edit/{id}', 'StudentController@editApi');
-    Route::get('student/remover/{id}', 'StudentController@removerApi');
+    
 
     Route::get('user/index', 'UserController@indexApi');
     Route::post('user/store', 'UserController@storeApi');

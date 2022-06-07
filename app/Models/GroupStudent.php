@@ -13,5 +13,12 @@ class GroupStudent extends Model {
         'created_at',
         'updated_at',
     ];
+    
+    
+    
+    public function student() {
+
+        return $this->hasOne(Student::class, 'id', 'student_id');
+    }
 
 }

@@ -19,6 +19,11 @@ class ScheduleStudentController extends Controller {
         $this->scheduleStudentService = $scheduleStudentService;
     }
 
+    public function weatherForecast(Request $request) {
+        $scheduleStudent = $this->scheduleStudentService->nextClass();
+        return response()->json(new ScheduleStudentResource($scheduleStudent), 200);
+    }
+
     public function indexApi(Request $request) {
         if ($request->isMethod("post")) {
             $scheduleStudent = $this->scheduleStudentService->findAll();

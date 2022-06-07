@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\ScheduleStudent;
+use Illuminate\Support\Facades\Http;
 
 class ScheduleStudentService {
 
@@ -45,5 +46,25 @@ class ScheduleStudentService {
     public function delete(int $id) {
         return $this->scheduleStudent->find($id)->delete();
     }
+    
+    public function nextClass() {
+        
+        $response = Http::get('http://api.hgbrasil.com/weather?woeid=455826');
+        if (!empty($response->collect()['results']['forecast'])) {
+            $forecast = [];
+            foreach ($response->collect()['results']['forecast'] as $data) {
+                $forecast[$data['date']] = $data;
+            }
+        }
+        $scheduleStudent = $this->scheduleStudent->where('id', '<=', 2)->get();
+        
+        
+        foreach ($scheduleStudent as $key => $data) {
+            $scheduleStudent[$key]->group_student = $data->groupStudent->toArray();
+            $scheduleStudent[$key]->forecast = $forecast[$data->date->format('d/m')];
+        }
+        return $scheduleStudent;
+    }
+    
 
 }
