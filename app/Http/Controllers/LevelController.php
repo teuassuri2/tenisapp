@@ -19,11 +19,11 @@ class LevelController extends Controller {
         $this->levelService = $levelService;
     }
 
-    public function indexApi(Request $request) {
-        if ($request->isMethod("post")) {
+    public function indexApi() {
+        //if ($request->isMethod("post")) {
             $level = $this->levelService->findAll();
             return response()->json(new LevelResource($level), 200);
-        }
+        //}
     }
 
     public function index() {

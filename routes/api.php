@@ -14,38 +14,40 @@ use Illuminate\Support\Facades\Route;
   |
  */
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+/*Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
-    Route::post('login', 'AuthController@login');
+    Route::get('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
 });
+ * 
+ */
 
 Route::group(['middleware' => 'apiJwt', 'prefix' => 'rest'], function () {
-
     Route::get('weather/forecast', 'ScheduleStudentController@weatherForecast');
-    
-    Route::get('student/index', 'StudentController@indexApi');
-    Route::post('student/store', 'StudentController@storeApi');
-    Route::get('student/edit/{id}', 'StudentController@editApi');
-    Route::get('student/remover/{id}', 'StudentController@removerApi');
-    
-    
-    Route::get('group/index', 'GroupController@indexApi');
-    Route::post('group/store', 'GroupController@storeApi');
-    Route::post('group/edit/{id}', 'GroupController@editApi');
-    Route::post('group/remover/{id}', 'GroupController@removerApi');
-
-    Route::get('group_day/index/{group_id}', 'GroupDayController@indexApi');
-
-    Route::get('group_student/index/{student_id}', 'ScheduleStudentController@indexApi');
-
     Route::get('level/index', 'LevelController@indexApi');
-
     
+    
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('index', 'UserController@indexApi');
+        Route::post('store', 'UserController@storeApi');
+        Route::post('edit/{id}', 'UserController@editApi');
+        Route::get('remover/{id}', 'UserController@removerApi');
+    });
 
-    Route::get('user/index', 'UserController@indexApi');
-    Route::post('user/store', 'UserController@storeApi');
-    Route::post('user/edit/{id}', 'UserController@editApi');
-    Route::get('user/remover/{id}', 'UserController@removerApi');
+    Route::group(['prefix' => 'group'], function () {
+        Route::get('index', 'GroupController@indexApi');
+        Route::post('store', 'GroupController@storeApi');
+        Route::post('edit/{id}', 'GroupController@editApi');
+        Route::post('remover/{id}', 'GroupController@removerApi');
+    });
+
+    Route::group(['prefix' => 'student'], function () {
+        Route::get('index', 'StudentController@indexApi');
+        Route::get('group/{group_id}', 'StudentController@studentByGroup');
+        Route::post('store', 'StudentController@storeApi');
+        Route::post('edit/{id}', 'StudentController@editApi'); 
+        Route::get('delete/{id}', 'StudentController@deleteApi');
+    });
+
 });
 

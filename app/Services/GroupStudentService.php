@@ -29,6 +29,14 @@ class GroupStudentService {
     public function findAll() {
         return $this->groupStudent->all();
     }
+    
+    public function getGruposByStudent($student_id) {
+        return $this->groupStudent->select('group.*')
+                ->join('group', 'group.id', '=', 'group_student.group_id')
+                ->where('group_student.student_id', $student_id)
+                ->get();
+    }
+    
 
     public function findOne(int $id) {
         return $this->groupStudent->find($id);

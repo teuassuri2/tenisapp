@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return redirect()->route('auth');
+    //return redirect()->route('auth');
 });
 
 
 
 Route::fallback(function () {
+    exit('Route not found');
     return 'Route not found';
 });

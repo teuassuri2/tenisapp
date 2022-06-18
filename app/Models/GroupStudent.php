@@ -16,9 +16,10 @@ class GroupStudent extends Model {
     
     
     
-    public function student() {
-
-        return $this->hasOne(Student::class, 'id', 'student_id');
+   public function Groups()
+    {
+       
+        return $this->hasMany(Group::class, 'group_id', 'id');
     }
 
 }

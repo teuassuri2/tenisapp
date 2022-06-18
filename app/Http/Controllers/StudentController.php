@@ -20,10 +20,13 @@ class StudentController extends Controller {
     }
 
     public function indexApi(Request $request) {
-        if ($request->isMethod("post")) {
-            $student = $this->studentService->findAll();
-            return response()->json(new StudentResource($student), 200);
-        }
+        $student = $this->studentService->findAllAndGroups();
+        return response()->json(new StudentResource($student), 200);
+    }
+
+    public function studentByGroup($group_id) {
+        $student = $this->studentService->studentByGroup($group_id);
+        return response()->json(new StudentResource($student), 200);
     }
 
     public function index() {
@@ -38,11 +41,12 @@ class StudentController extends Controller {
         }
     }
 
-    public function editApi(Student $student, StoreStudentRequest $request) {
+    public function editApi(Int $id, Request $request) {
+        
         if ($request->isMethod("post")) {
-            $student = $this->studentService->update($student, $request->validated());
-            return response()->json(new StudentJsonResource($student), 200);
-        }
+            $student = $this->studentService->update($id, $request->all());
+            return response()->json($student, 200);
+       }
     }
 
     public function store(StoreStudentRequest $request) {
@@ -60,10 +64,8 @@ class StudentController extends Controller {
     }
 
     public function deleteApi(int $id) {
-        if ($request->isMethod("post")) {
             $this->studentService->delete($id);
             return response()->json((true), 200);
-        }
     }
 
     public function delete(int $id) {

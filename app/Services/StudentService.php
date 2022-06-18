@@ -7,9 +7,11 @@ use App\Models\Student;
 class StudentService {
 
     private Student $student;
+    private GroupStudentService $groupStudentService;
 
-    public function __construct(Student $student) {
+    public function __construct(Student $student, GroupStudentService $groupStudentService) {
         $this->student = $student;
+        $this->groupStudentService = $groupStudentService;
     }
 
     public function store(array $data) {
@@ -22,25 +24,45 @@ class StudentService {
         return $this->student;
     }
 
-    public function update(Student $student, array $data) {
+    public function update(Int $id, array $data) {
+        
+        $student = $this->findOne($id);
         $student->name = $data['name'];
         $student->email = $data['email'];
         $student->phone = $data['phone'];
-        $student->client_id = $data['client_id'];
-        $student->level_id = $data['level_id'];
+        $student->gender = $data['gender'];
+
+        if (!empty($data['level_id']))
+            $student->level_id = $data['level_id'];
+        
         $student->save();
         return $student;
     }
-
+    
     public function findAll() {
         return $this->student->all();
+    }
+
+    public function findAllAndGroups() {
+        $student = $this->student->all();
+
+        foreach ($student as $key => $data) {
+            $student[$key]->level = $data->Level()->get()[0]->name;
+            $student[$key]->groups = $this->groupStudentService->getGruposByStudent($data->id);
+        }
+
+        return $student;
+    }
+
+    public function studentByGroup($group_id) {
+        return $this->student->studentByGroup($group_id);
     }
 
     public function findOne(int $id) {
         return $this->student->find($id);
     }
 
-    public function delete(int $id) {
+    public function delete(int $id) { 
         return $this->student->find($id)->delete();
     }
 
