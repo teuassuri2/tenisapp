@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
  * 
  */
 
-Route::group(['middleware' => 'apiJwt', 'prefix' => 'rest'], function () {
+Route::group(['prefix' => 'rest'], function () {
     Route::get('weather/forecast', 'ScheduleStudentController@weatherForecast');
     Route::get('level/index', 'LevelController@indexApi');
     
