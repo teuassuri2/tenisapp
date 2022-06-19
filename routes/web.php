@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
+    exit("aqui");
     //return redirect()->route('auth');
 });
 
