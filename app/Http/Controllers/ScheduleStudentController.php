@@ -30,6 +30,16 @@ class ScheduleStudentController extends Controller {
             return response()->json(new ScheduleStudentResource($scheduleStudent), 200);
         }
     }
+    
+    public function classToday(Request $request) {
+            $scheduleStudent = $this->scheduleStudentService->classToday();
+            return response()->json(new ScheduleStudentResource($scheduleStudent), 200);
+    }
+    
+    public function classWeek(Request $request) {
+            $scheduleStudent = $this->scheduleStudentService->classWeek();
+            return response()->json(new ScheduleStudentResource($scheduleStudent), 200);
+    }
 
     public function index() {
         $scheduleStudent = $this->scheduleStudentService->findAll();

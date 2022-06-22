@@ -16,26 +16,32 @@ class UserService {
         $this->user->name = $data['name'];
         $this->user->phone = $data['phone'];
         $this->user->email = $data['email'];
-        $this->user->remember_token = $data['remember_token'];
-        $this->user->password = $data['password'];
-        $this->user->email_verified_at = $data['email_verified_at'];
+        //$this->user->remember_token = $data['remember_token'];
+        $this->user->password = md5($data['password']);
+        //$this->user->email_verified_at = $data['email_verified_at'];
         $this->user->client_id = $data['client_id'];
         $this->user->save();
         return $this->user;
     }
 
-    public function update(User $user, array $data) {
+    public function update($id, array $data) {
+        $user = $this->user->find($id);
         $user->name = $data['name'];
         $user->phone = $data['phone'];
         $user->email = $data['email'];
-        $user->remember_token = $data['remember_token'];
+        #$user->remember_token = $data['remember_token'];
         $user->password = $data['password'];
-        $user->email_verified_at = $data['email_verified_at'];
-        $user->client_id = $data['client_id'];
+        #$user->email_verified_at = $data['email_verified_at'];
+        #$user->client_id = $data['client_id'];
         $user->save();
         return $user;
     }
 
+    
+    public function findAllByClient($client_id) {
+        return $this->user->where('client_id', $client_id)->where('status', 1)->get();
+    }
+    
     public function findAll() {
         return $this->user->all();
     }
@@ -45,7 +51,10 @@ class UserService {
     }
 
     public function delete(int $id) {
-        return $this->user->find($id)->delete();
+        $user =  $this->user->find($id);
+        $user->status = 0;
+        $user->save();
+        return $user;
     }
 
 }

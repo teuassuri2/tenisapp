@@ -19,8 +19,8 @@ class UserController extends Controller {
         $this->userService = $userService;
     }
 
-    public function indexApi(Request $request) {
-        $user = $this->userService->findAll();
+    public function indexApi(int $client_id) {
+        $user = $this->userService->findAllByClient($client_id);
         return response()->json(new UserResource($user), 200);
     }
 
@@ -29,18 +29,18 @@ class UserController extends Controller {
         return view('user.index', ['user' => $user]);
     }
 
-    public function storeApi(StoreUserRequest $request) {
-        if ($request->isMethod("post")) {
-            $user = $this->userService->store($request->validated());
-            return response()->json(new UserJsonResource($user), 200);
-        }
+    public function storeApi(Request $request) {
+        #if ($request->isMethod("post")) {
+            $user = $this->userService->store($request->all());
+            return response()->json(($user), 200);
+        #}
     }
 
-    public function editApi(User $user, StoreUserRequest $request) {
-        if ($request->isMethod("post")) {
-            $user = $this->userService->update($user, $request->validated());
-            return response()->json(new UserJsonResource($user), 200);
-        }
+    public function editApi(int $id, Request $request) {
+        #if ($request->isMethod("post")) {
+            $user = $this->userService->update($id, $request->all());
+            return response()->json(($user), 200);
+        #}
     }
 
     public function store(StoreUserRequest $request) {
@@ -57,11 +57,11 @@ class UserController extends Controller {
         return view('user.edit', ['dados' => $user]);
     }
 
-    public function deleteApi(int $id) {
-        if ($request->isMethod("post")) {
+    public function removerApi(int $id) {
+        //if ($request->isMethod("post")) {
             $this->userService->delete($id);
             return response()->json((true), 200);
-        }
+        //}
     }
 
     public function delete(int $id) {

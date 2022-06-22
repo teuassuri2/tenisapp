@@ -66,5 +66,29 @@ class ScheduleStudentService {
         return $scheduleStudent;
     }
     
+    
+    public function classToday() {
+        
+        return $this->scheduleStudent
+                ->select('student.*', 'schedule_student.date')
+                ->join('group_student', 'group_student.id', '=', 'schedule_student.group_student_id')
+                ->join('student', 'student.id', '=', 'group_student.student_id')
+                ->where('schedule_student.date', date('Y-m-d'))
+                ->get();
+    }
+    
+    
+    public function classWeek() {
+        
+        return $this->scheduleStudent
+                ->select('student.*', 'schedule_student.date')
+                ->join('group_student', 'group_student.id', '=', 'schedule_student.group_student_id')
+                ->join('student', 'student.id', '=', 'group_student.student_id')
+                ->where('schedule_student.date', '>=' ,date('Y-m-d'))
+                ->where('schedule_student.date', '<=' , date('Y-m-d', strtotime(date('Y-m-d'). ' + 7 days')))
+                ->get();
+    }
+    
+    
 
 }

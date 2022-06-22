@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('logout', 'AuthController@logout');
 });
  * 
- */
+ */ 
 
 
 

@@ -19,11 +19,9 @@ class GroupController extends Controller {
         $this->groupService = $groupService;
     }
 
-    public function indexApi(Request $request) {
-        if ($request->isMethod("post")) {
-            $group = $this->groupService->findAll();
+    public function indexApi($client_id) {
+            $group = $this->groupService->findAllByClient($client_id);
             return response()->json(new GroupResource($group), 200);
-        }
     }
 
     public function index() {
@@ -31,18 +29,18 @@ class GroupController extends Controller {
         return view('group.index', ['group' => $group]);
     }
 
-    public function storeApi(StoreGroupRequest $request) {
-        if ($request->isMethod("post")) {
-            $group = $this->groupService->store($request->validated());
-            return response()->json(new GroupJsonResource($group), 200);
-        }
+    public function storeApi(Request $request) {
+        //if ($request->isMethod("post")) {
+            $group = $this->groupService->store($request->all());
+            return response()->json($group, 200);
+       // }
     }
 
-    public function editApi(Group $group, StoreGroupRequest $request) {
-        if ($request->isMethod("post")) {
-            $group = $this->groupService->update($group, $request->validated());
-            return response()->json(new GroupJsonResource($group), 200);
-        }
+    public function editApi($id, Request $request) {
+        #if ($request->isMethod("post")) {
+            $group = $this->groupService->update($id, $request->all());
+            return response()->json($group, 200);
+        #}
     }
 
     public function store(StoreGroupRequest $request) {
@@ -59,11 +57,9 @@ class GroupController extends Controller {
         return view('group.edit', ['dados' => $group]);
     }
 
-    public function deleteApi(int $id) {
-        if ($request->isMethod("post")) {
+    public function removerApi(int $id) {
             $this->groupService->delete($id);
             return response()->json((true), 200);
-        }
     }
 
     public function delete(int $id) {

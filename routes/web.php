@@ -14,35 +14,40 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    exit("aqui");
+    echo 'foiii';
+    return "Sem rota";
     //return redirect()->route('auth');
 });
 
 Route::group(['prefix' => 'rest'], function () {
     Route::group(['prefix' => 'api'], function () {
+        
         Route::get('weather/forecast', 'ScheduleStudentController@weatherForecast');
         Route::get('level/index', 'LevelController@indexApi');
-
+        
+        Route::post('classes/today', 'ScheduleStudentController@classToday');
+        Route::post('classes/week', 'ScheduleStudentController@classWeek');
+        
         Route::group(['prefix' => 'user'], function () {
-            Route::get('index', 'UserController@indexApi');
+            Route::get('index/{client_id}', 'UserController@indexApi');
             Route::post('store', 'UserController@storeApi');
             Route::post('edit/{id}', 'UserController@editApi');
-            Route::get('remover/{id}', 'UserController@removerApi');
+            Route::post('delete/{id}', 'UserController@removerApi');
         });
 
         Route::group(['prefix' => 'group'], function () {
-            Route::get('index', 'GroupController@indexApi');
+            Route::get('index/{client_id}', 'GroupController@indexApi');
             Route::post('store', 'GroupController@storeApi');
             Route::post('edit/{id}', 'GroupController@editApi');
             Route::post('remover/{id}', 'GroupController@removerApi');
         });
 
         Route::group(['prefix' => 'student'], function () {
-            Route::get('index', 'StudentController@indexApi');
+            Route::get('index/{client_id}', 'StudentController@indexApi');
             Route::get('group/{group_id}', 'StudentController@studentByGroup');
             Route::post('store', 'StudentController@storeApi');
             Route::post('edit/{id}', 'StudentController@editApi');
-            Route::get('delete/{id}', 'StudentController@deleteApi');
+            Route::post('delete/{id}', 'StudentController@deleteApi');
         });
     });
 });
