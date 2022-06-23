@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://127.0.0.1:8000/*',
-        'https://www.tenispro.igrejasmart.com.br/*'
+        'https://www.tenispro.igrejasmart.com.br/*',
+        'https://tenispro.igrejasmart.com.br/*'
     ];
 }
