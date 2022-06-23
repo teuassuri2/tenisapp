@@ -69,4 +69,9 @@ class UserController extends Controller {
         return redirect('/index');
     }
 
+    
+     public function login(Request $request) {
+        $user = $this->userService->login($request->all());
+        return response()->json($user, 200);
+    }
 }

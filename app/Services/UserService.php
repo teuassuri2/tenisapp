@@ -56,5 +56,15 @@ class UserService {
         $user->save();
         return $user;
     }
+    
+     public function login($data) {
+        $login =  $this->user->where('email', $data['email'])->where('password', md5($data['password']))->where('status', 1)->get()->last();
+        
+        if (empty($login)){
+            return false;
+        }
+        
+        return $login;
+    }
 
 }

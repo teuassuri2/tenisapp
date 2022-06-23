@@ -22,6 +22,8 @@ Route::get('/', function () {
 Route::group(['prefix' => 'rest'], function () {
     Route::group(['prefix' => 'api'], function () {
         
+        Route::post('login', 'UserController@login');
+        
         Route::get('weather/forecast', 'ScheduleStudentController@weatherForecast');
         Route::get('level/index', 'LevelController@indexApi');
         
