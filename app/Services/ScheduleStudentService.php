@@ -70,8 +70,9 @@ class ScheduleStudentService {
     public function classToday() {
         
         return $this->scheduleStudent
-                ->select('student.*', 'schedule_student.date')
+                ->select('student.*', 'schedule_student.date', 'group.name as group')
                 ->join('group_student', 'group_student.id', '=', 'schedule_student.group_student_id')
+                ->join('group', 'group.id', '=', 'group_student.group_id')
                 ->join('student', 'student.id', '=', 'group_student.student_id')
                 ->where('schedule_student.date', date('Y-m-d'))
                 ->get();
