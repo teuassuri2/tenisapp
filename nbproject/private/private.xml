@@ -6,6 +6,7 @@
             <file>file:/G:/Laravel%208/tenisapp/app/Http/Controllers/UserController.php</file>
             <file>file:/G:/Laravel%208/tenisapp/app/Services/ScheduleStudentService.php</file>
             <file>file:/G:/Laravel%208/tenisapp/app/Services/UserService.php</file>
+            <file>file:/G:/Laravel%208/tenisapp/app/Http/Middleware/VerifyCsrfToken.php</file>
             <file>file:/G:/Laravel%208/tenisapp/routes/web.php</file>
             <file>file:/G:/Laravel%208/tenisapp/app/Http/Controllers/ScheduleStudentController.php</file>
         </group>

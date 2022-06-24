@@ -73,7 +73,7 @@ class ScheduleStudentService {
                 ->select('student.*', 'schedule_student.date')
                 ->join('group_student', 'group_student.id', '=', 'schedule_student.group_student_id')
                 ->join('student', 'student.id', '=', 'group_student.student_id')
-                ->where('schedule_student.date', date('Y-m-d'))
+                ->where('Aschedule_student.date', date('Y-m-d'))
                 ->get();
     }
     
