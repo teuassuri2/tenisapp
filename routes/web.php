@@ -30,6 +30,9 @@ Route::group(['prefix' => 'rest'], function () {
         Route::post('classes/today', 'ScheduleStudentController@classToday');
         Route::post('classes/week', 'ScheduleStudentController@classWeek');
         
+        
+        Route::post('classes/cheking', 'ScheduleStudentController@classCheking');
+        
         Route::group(['prefix' => 'user'], function () {
             Route::get('index/{client_id}', 'UserController@indexApi');
             Route::post('store', 'UserController@storeApi');

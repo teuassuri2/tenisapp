@@ -85,5 +85,13 @@ class ScheduleStudentController extends Controller {
         $this->scheduleStudentService->delete($id);
         return redirect('/index');
     }
+    
+    
+    public function classCheking(Request $request) {
+        if ($request->isMethod("post")) {
+            return response()->json(($this->scheduleStudentService->cheking($request->all())), 200);
+        }
+    }
+    
 
 }

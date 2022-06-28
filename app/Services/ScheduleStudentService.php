@@ -91,5 +91,13 @@ class ScheduleStudentService {
     }
     
     
+    public function cheking($data) {
+        $scheduleStudent = $this->scheduleStudent->find($data['schedule_student_id']);
+        $scheduleStudent->presence_absence = 1;
+        $scheduleStudent->status = 1;
+        return $scheduleStudent->save();
+    }
+    
+    
 
 }
