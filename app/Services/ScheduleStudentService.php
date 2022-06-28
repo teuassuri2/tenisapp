@@ -70,7 +70,7 @@ class ScheduleStudentService {
     public function classToday() {
         
         return $this->scheduleStudent
-                ->select('student.*', 'schedule_student.date', 'group.name as group')
+                ->select('student.*', 'schedule_student.date', 'group.name as group', 'schedule_student.id as schedule_student_id')
                 ->join('group_student', 'group_student.id', '=', 'schedule_student.group_student_id')
                 ->join('group', 'group.id', '=', 'group_student.group_id')
                 ->join('student', 'student.id', '=', 'group_student.student_id')
@@ -82,7 +82,7 @@ class ScheduleStudentService {
     public function classWeek() {
         
         return $this->scheduleStudent
-                ->select('student.*', 'schedule_student.date')
+                ->select('student.*', 'schedule_student.date', 'schedule_student.id as schedule_student_id')
                 ->join('group_student', 'group_student.id', '=', 'schedule_student.group_student_id')
                 ->join('student', 'student.id', '=', 'group_student.student_id')
                 ->where('schedule_student.date', '>=' ,date('Y-m-d'))
